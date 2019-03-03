@@ -8,6 +8,7 @@ const anonChat = require('../anon_chat');
 const CommandHelp = {
     b: 'Usage: "/b <login> [reason]" - Shortcut for /ban',
     chatters: 'Usage: "/chatters" - Retrieces the number of chatters in the chat',
+    customcommands: 'Usage: "/customcommands" - Shows custom commands added to BTTV',
     followed: 'Usage: "/followed" - Tells you for how long you have been following a channel',
     follows: 'Usage: "/follows" - Retrieves the number of followers for the channel',
     join: 'Usage: "/join" - Temporarily join a chat (anon chat)',
@@ -28,6 +29,12 @@ const CommandHelp = {
     u: 'Usage "/u <login>" - Shortcut for /unban',
     uptime: 'Usage "/uptime" - Retrieves the amount of time the channel has been live',
     viewers: 'Usage "/viewers" - Retrieves the number of viewers watching the channel'
+};
+
+const CustomCommands = {
+    brainpower: 'Usage: "/brainpower [isAction]" - Sends the brainpower meme',
+    pyramid: 'Usage: "/pyramid [size] [emote]" - Makes a pyramid of the given size and emote',
+    rainbow: 'Usage: "/rainbow [message]" - Spams the given message in rainbow colors'
 };
 
 function secondsToLength(s) {
@@ -106,6 +113,14 @@ function massUnban() {
     }
 
     getBannedChatters();
+}
+
+function isModeratorOrHigher() {
+    return twitch.getCurrentUserIsModerator() || twitch.getCurrentUserIsOwner();
+}
+
+function getTimeBetweenMessages() {
+    return isModeratorOrHigher() ? 100 : 1500;
 }
 
 function handleCommands(message) {
@@ -216,6 +231,82 @@ function handleCommands(message) {
                 .catch(() => twitch.sendChatAdminMessage('Could not fetch stream.'));
             break;
 
+        // custom commands
+        case 'brainpower':
+            let brainpowerMessage = 'O-oooooooooo AAAAE-A-A-I-A-U- JO-oooooooooooo AAE-O-A-A-U-U-A- E-eee-ee-eee AAAAE-A-E-I-E-A-JO-ooo-oo-oo-oo EEEEO-A-AAA-AAAA';
+        
+            if (messageParts && messageParts.length && (messageParts[0] == 'true' || messageParts[0] == '1')) {
+                return '/me ' + brainpowerMessage;
+            }
+            return brainpowerMessage;
+        case 'pyramid':
+            let size = 0;
+            let emote = '';
+
+            if (!messageParts || messageParts.length !== 2) {
+                twitch.sendChatAdminMessage('Example usage: /pyramid 3 PogChamp');
+                break;
+            }
+
+            [size, emote] = messageParts;
+
+            if (size < 2) {
+                twitch.sendChatAdminMessage('Pyramid can\'t be smaller than 2 emotes');
+                break;
+            }
+
+            for (let i = 1; i < (size * 2); i++) {
+                let n = (i > size) ? (size * 2) - i : i;
+                
+                setTimeout(function(n, emote) {
+                    twitch.sendChatMessage((emote + ' ').repeat(n));
+                }, ((i - 1) * getTimeBetweenMessages()), n, emote);
+            }
+            break;
+        case 'rainbow':
+            if (!messageParts || !messageParts.length) {
+                twitch.sendChatAdminMessage('Example usage: /rainbow SUB HYPE');
+                break;
+            }
+            
+            const colors = ['#FF0000', '#FF7F00', '#FFFF00', '#00FF00', '#0000FF', '#4B0082'];
+            const originalColor = '#DAA520';
+            const timeBetween = isModeratorOrHigher() ? 400 : 600;
+            
+            let i = 0;
+            
+            for (let color of colors) {
+                setTimeout(function(i, color) {
+                    twitch.sendChatMessage(`/color ${color}`);
+                    setTimeout(function(i) {
+                        if (i == 0) {
+                            twitch.sendChatMessage(`/me RAINBOW TIME!`);
+                        } else {
+                            twitch.sendChatMessage(`/me ${messageParts.join(' ')}`);
+                        }
+                    }, isModeratorOrHigher() ? 300 : 500, i);
+                }, i * timeBetween, i, color);
+                i++;
+            }
+            
+            setTimeout(_ => {
+                twitch.sendChatMessage(`/color ${originalColor}`);
+                setTimeout(_ => {
+                    twitch.sendChatMessage(`/me ${messageParts.join(' ')}`);
+                }, isModeratorOrHigher() ? 300 : 500);
+            }, i * timeBetween);
+            break;
+        
+        case 'customcommands':
+            const customCommandNames = Object.keys(CustomCommands);
+            const customSubCommand = messageParts.length && messageParts[0].replace(/^\//, '').toLowerCase();
+            if (customSubCommand && customCommandNames.includes(customSubCommand)) {
+                twitch.sendChatAdminMessage(CustomCommands[customSubCommand]);
+            } else if (!customSubCommand) {
+                twitch.sendChatAdminMessage(`Custom Chat Commands: (Use "/customcommands <command>" for more info on a command) /${customCommandNames.join(' /')}`);
+            }
+            break;
+            
         case 'help':
             const commandNames = Object.keys(CommandHelp);
             const subCommand = messageParts.length && messageParts[0].replace(/^\//, '').toLowerCase();
