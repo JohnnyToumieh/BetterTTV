@@ -3,7 +3,6 @@ const browserify = require('browserify');
 const buffer = require('vinyl-buffer');
 const concat = require('gulp-concat');
 const del = require('del');
-const eslint = require('gulp-eslint');
 const fs = require('fs');
 const git = require('git-rev-sync');
 const gulp = require('gulp');
@@ -52,16 +51,8 @@ gulp.task(
 );
 
 gulp.task(
-    'lint',
-    () => gulp.src('src/**/*.js')
-        .pipe(eslint())
-        .pipe(eslint.format())
-        .pipe(eslint.failOnError())
-);
-
-gulp.task(
     'prepare',
-    ['cleanup', 'lint'],
+    ['cleanup'],
     () => gulp.src('src/**/*')
         .pipe(gulp.dest('build'))
 );
