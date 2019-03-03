@@ -271,7 +271,9 @@ function handleCommands(message) {
             
             const colors = ['#FF0000', '#FF7F00', '#FFFF00', '#00FF00', '#0000FF', '#4B0082'];
             const originalColor = '#DAA520';
-            const timeBetween = isModeratorOrHigher() ? 400 : 600;
+            const time1 = isModeratorOrHigher() ? 150 : 1050;
+            const time2 = isModeratorOrHigher() ? 300 : 1200;
+            const extramessage = isModeratorOrHigher() ? "" : "⠀";
             
             let i = 0;
             
@@ -279,22 +281,15 @@ function handleCommands(message) {
                 setTimeout(function(i, color) {
                     twitch.sendChatMessage(`/color ${color}`);
                     setTimeout(function(i) {
-                        if (i == 0) {
-                            twitch.sendChatMessage(`/me RAINBOW TIME!`);
-                        } else {
-                            twitch.sendChatMessage(`/me ${messageParts.join(' ')}`);
-                        }
-                    }, isModeratorOrHigher() ? 300 : 500, i);
-                }, i * timeBetween, i, color);
+                        twitch.sendChatMessage(`/me ${messageParts.join(' ')}` + extramessage.repeat(i));
+                    }, time1, i);
+                }, i * time2, i, color);
                 i++;
             }
             
             setTimeout(_ => {
                 twitch.sendChatMessage(`/color ${originalColor}`);
-                setTimeout(_ => {
-                    twitch.sendChatMessage(`/me ${messageParts.join(' ')}`);
-                }, isModeratorOrHigher() ? 300 : 500);
-            }, i * timeBetween);
+            }, i * time2);
             break;
         
         case 'customcommands':
