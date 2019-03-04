@@ -348,7 +348,7 @@ function handleCommands(message) {
                 setTimeout(function(n, emote) {
                     let toSend = (emote + ' ').repeat(n);
                     if (n != size) {
-                        toSend += extramessage;
+                        toSend += " " + extramessage;
                     }
                     twitch.sendChatMessage(toSend);
                 }, ((i - 1) * getTimeBetweenMessages()), n, emote);
@@ -370,7 +370,7 @@ function handleCommands(message) {
                     setTimeout(function(i, color) {
                         twitch.sendChatMessage(`/color ${color}`);
                         setTimeout(function(i) {
-                            twitch.sendChatMessage(`/me ${messageParts.join(' ')}` + extramessage.repeat(i));
+                            twitch.sendChatMessage(`/me ${messageParts.join(' ')}` + " " + extramessage.repeat(i));
                         }, time1, i);
                     }, i * time2, i, colors[key]);
                     i++;
