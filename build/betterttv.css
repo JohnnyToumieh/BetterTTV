@@ -68,73 +68,6 @@
         flex-direction: column-reverse;
     }
 
-.bttv-chat-line-deleted {
-  opacity: 0.5;
-}
-
-#bttv-poll-contain {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  width: 100%;
-  height: 50px;
-
-  background: #222222;
-  color: #e3e3e3;
-  box-shadow: 0px 8px 8px -5px #000000;
-
-  overflow: hidden;
-  display: none;
-  z-index: 99999;
-}
-
-  #bttv-poll-contain .title {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-
-    height: 50px;
-    line-height: 50px;
-    padding: 0px 24px;
-
-    font-size: 16px;
-
-    cursor: pointer;
-  }
-
-  #bttv-poll-contain .close {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    width: 50px;
-    height: 50px;
-    padding: 17px;
-
-    background: #800;
-
-    cursor: pointer;
-
-    z-index: 999999;
-  }
-
-  #bttv-poll-contain .close svg path {
-      fill: #fff;
-    }
-
-  #bttv-poll-contain .frame {
-    position: absolute;
-    top: 50px;
-    left: 0px;
-
-    width: 100%;
-    height: 400px;
-
-    border: none;
-
-    display: none;
-  }
-
 #bttv-pin-container {
   position: absolute;
   top: 0px;
@@ -171,6 +104,10 @@
 
 .chat-line__message.bttv-highlighted, .vod-message.bttv-highlighted {
   background-color: rgba(255, 0, 0, 0.3) !important;
+}
+
+.bttv-chat-line-deleted {
+  opacity: 0.5;
 }
 
 .bttv-swap-chat .right-column {
@@ -321,49 +258,6 @@
   .chat-settings button[data-a-target="clear-chat-button"] {
     display: none;
   }
-
-#bttv-channel-state-contain {
-  position: absolute;
-  top: 24px;
-  left: 20px;
-  width: 150px;
-  height: 24px;
-  color: #6441a4;
-}
-
-  #bttv-channel-state-contain svg path {
-    fill: #6441a4;
-  }
-
-  #bttv-channel-state-contain div {
-    float: left;
-    height: 22px;
-    display: none;
-  }
-
-  #bttv-channel-state-contain .slow {
-    position: relative;
-    text-align: right;
-  }
-
-  #bttv-channel-state-contain .slow .slow-time {
-      font-size: 9px;
-      padding-top: 5px;
-      margin-right: -4px;
-    }
-
-.bttv-chat-header-chat-state #chat-room-header-label p[data-test-selector="chat-room-header-label"] {
-  font-size: 10px;
-  margin-top: -14px;
-}
-
-.tw-root--theme-dark #bttv-channel-state-contain {
-    color: #b19dd8;
-  }
-
-.tw-root--theme-dark #bttv-channel-state-contain svg path {
-      fill: #b19dd8;
-    }
 
 .bttv-hide-tab-completion-tooltip .tw-balloon[data-a-target="autocomplete-balloon"] {
     display: none !important;
@@ -519,21 +413,6 @@ div.bttv-emote + .bttv-emo-567b5dc00e984428652809bd img {
   background: #fff;
 }
 
-.pinned-cheer .pinned-cheer__bounding-box:before {
-  content: "×";
-  position: absolute;
-  color: #777;
-  cursor: pointer;
-  top: 0px;
-  right: 5px;
-  width: 8px;
-  height: 15px;
-}
-
-.bttv-hide-chat-clips .chat-card__link {
-    display: none !important;
-  }
-
 .bttv-hide-bits .pinned-cheer,
   .bttv-hide-bits .pinned-cheer-v2,
   .bttv-hide-bits button[data-a-target="bits-button"],
@@ -544,6 +423,10 @@ div.bttv-emote + .bttv-emo-567b5dc00e984428652809bd img {
     display: none !important;
   }
 
+.bttv-hide-chat-clips .chat-card__link {
+    display: none !important;
+  }
+
 .bttv-hide-friends .online-friends, .bttv-hide-friends .recommended-friends {
     display: none;
   }
@@ -551,15 +434,6 @@ div.bttv-emote + .bttv-emo-567b5dc00e984428652809bd img {
 .bttv-hide-room-selector .room-selector__header {
     display: none !important;
   }
-
-.bttv-host-button {
-  background: #efeef1 !important;
-  margin-bottom: 10px;
-}
-
-.tw-root--theme-dark .bttv-host-button {
-  background: #433f4a !important;
-}
 
 .bttv-hide-featured-channels .recommended-channels {
     display: none;
@@ -575,6 +449,23 @@ div.bttv-emote + .bttv-emo-567b5dc00e984428652809bd img {
 
 .bttv-hide-followed-offline .side-nav-card__link[href*="/videos/"] {
     display: none !important;
+  }
+
+.bttv-host-button {
+  background: #efeef1 !important;
+  margin-bottom: 10px;
+}
+
+.tw-root--theme-dark .bttv-host-button {
+  background: #433f4a !important;
+}
+
+.bttv-hide-player-extensions .extension-container, .bttv-hide-player-extensions .extension-taskbar {
+    display: none !important;
+  }
+
+.bttv-hide-player-cursor .video-player--fullscreen .player {
+    cursor: none;
   }
 
 #bttvSettingsPanel {
@@ -902,10 +793,119 @@ div.bttv-emote + .bttv-emo-567b5dc00e984428652809bd img {
     background-color: #1f1925;
   }
 
-.bttv-hide-player-extensions .extension-container, .bttv-hide-player-extensions .extension-taskbar {
-    display: none !important;
+#bttv-poll-contain {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 100%;
+  height: 50px;
+
+  background: #222222;
+  color: #e3e3e3;
+  box-shadow: 0px 8px 8px -5px #000000;
+
+  overflow: hidden;
+  display: none;
+  z-index: 99999;
+}
+
+  #bttv-poll-contain .title {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+
+    height: 50px;
+    line-height: 50px;
+    padding: 0px 24px;
+
+    font-size: 16px;
+
+    cursor: pointer;
   }
 
-.bttv-hide-player-cursor .video-player--fullscreen .player {
-    cursor: none;
+  #bttv-poll-contain .close {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 50px;
+    height: 50px;
+    padding: 17px;
+
+    background: #800;
+
+    cursor: pointer;
+
+    z-index: 999999;
   }
+
+  #bttv-poll-contain .close svg path {
+      fill: #fff;
+    }
+
+  #bttv-poll-contain .frame {
+    position: absolute;
+    top: 50px;
+    left: 0px;
+
+    width: 100%;
+    height: 400px;
+
+    border: none;
+
+    display: none;
+  }
+
+#bttv-channel-state-contain {
+  position: absolute;
+  top: 24px;
+  left: 20px;
+  width: 150px;
+  height: 24px;
+  color: #6441a4;
+}
+
+  #bttv-channel-state-contain svg path {
+    fill: #6441a4;
+  }
+
+  #bttv-channel-state-contain div {
+    float: left;
+    height: 22px;
+    display: none;
+  }
+
+  #bttv-channel-state-contain .slow {
+    position: relative;
+    text-align: right;
+  }
+
+  #bttv-channel-state-contain .slow .slow-time {
+      font-size: 9px;
+      padding-top: 5px;
+      margin-right: -4px;
+    }
+
+.bttv-chat-header-chat-state #chat-room-header-label p[data-test-selector="chat-room-header-label"] {
+  font-size: 10px;
+  margin-top: -14px;
+}
+
+.tw-root--theme-dark #bttv-channel-state-contain {
+    color: #b19dd8;
+  }
+
+.tw-root--theme-dark #bttv-channel-state-contain svg path {
+      fill: #b19dd8;
+    }
+
+.pinned-cheer .pinned-cheer__bounding-box:before {
+  content: "×";
+  position: absolute;
+  color: #777;
+  cursor: pointer;
+  top: 0px;
+  right: 5px;
+  width: 8px;
+  height: 15px;
+}

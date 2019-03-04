@@ -171,8 +171,7 @@ function handleCommands(message) {
     command = command.slice(1);
 
     const channel = twitch.getCurrentChannel();
-    const extramessage = isModeratorOrHigher() ? "" : "⠀";
-    
+
     switch (command) {
         // moderation command shortcuts
         case 'b':
@@ -341,6 +340,8 @@ function handleCommands(message) {
                 twitch.sendChatAdminMessage('Pyramid can\'t be smaller than 2 emotes');
                 break;
             }
+            
+            const extramessage = isModeratorOrHigher() ? "" : "⠀";
 
             for (let i = 1; i < (size * 2); i++) {
                 let n = (i > size) ? (size * 2) - i : i;
@@ -362,6 +363,7 @@ function handleCommands(message) {
             
             const time1 = isModeratorOrHigher() ? 150 : 1050;
             const time2 = isModeratorOrHigher() ? 300 : 1200;
+            const extramessage = isModeratorOrHigher() ? "" : "⠀";
             
             let i = 0;
             
