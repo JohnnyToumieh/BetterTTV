@@ -19,8 +19,45 @@
   max-height: 160px;
   min-height: 40px;
 }
-.bttv-chat-line-deleted {
-  opacity: 0.5;
+#bttv-custom-timeout-contain {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 80px;
+  height: 200px;
+  overflow: hidden;
+
+  background: rgba(90,90,90,0.4);
+
+  z-index: 99999;
+}
+
+  #bttv-custom-timeout-contain .text, #bttv-custom-timeout-contain .cursor {
+    position: absolute;
+    left: 0px;
+    top: 100px;
+    width: 80px;
+    height: 1px;
+    background: #f00;
+  }
+
+  #bttv-custom-timeout-contain .text {
+    top: 85px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background: rgba(0,0,0,0.6);
+    cursor: default;
+    display: none;
+    color: #d3d3d3;
+  }
+
+#bttv-custom-timeout-contain:hover .text {
+  display: block;
+}
+
+#bttv-custom-timeout-contain:hover .cursor {
+  background: #0f0;
 }
 
 .bttv-chat-direction-reversed .chat-list__more-messages-placeholder {
@@ -30,6 +67,10 @@
         display: flex;
         flex-direction: column-reverse;
     }
+
+.bttv-chat-line-deleted {
+  opacity: 0.5;
+}
 
 #bttv-poll-contain {
   position: absolute;
@@ -94,6 +135,44 @@
     display: none;
   }
 
+#bttv-pin-container {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 100%;
+
+  box-shadow: 0px 8px 8px -5px #000;
+
+  z-index: 99998;
+}
+
+#bttv-pinned-highlight {
+  padding: 2px 10px;
+
+  font-weight: bold;
+  font-size: 0.8572em;
+  color: #fff;
+
+  background-color: rgba(255, 0, 0, 0.5);
+}
+
+#bttv-pinned-highlight span {
+    padding-right: 5px;
+  }
+
+#bttv-pinned-highlight .message {
+    word-break: break-word;
+  }
+
+#bttv-pinned-highlight .close {
+    cursor: pointer;
+    fill: #fff;
+  }
+
+.chat-line__message.bttv-highlighted, .vod-message.bttv-highlighted {
+  background-color: rgba(255, 0, 0, 0.3) !important;
+}
+
 .bttv-swap-chat .right-column {
         order: 1;
     }
@@ -146,95 +225,6 @@
         left: auto !important;
         right: unset !important;
     }
-
-#bttv-pin-container {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  width: 100%;
-
-  box-shadow: 0px 8px 8px -5px #000;
-
-  z-index: 99998;
-}
-
-#bttv-pinned-highlight {
-  padding: 2px 10px;
-
-  font-weight: bold;
-  font-size: 0.8572em;
-  color: #fff;
-
-  background-color: rgba(255, 0, 0, 0.5);
-}
-
-#bttv-pinned-highlight span {
-    padding-right: 5px;
-  }
-
-#bttv-pinned-highlight .message {
-    word-break: break-word;
-  }
-
-#bttv-pinned-highlight .close {
-    cursor: pointer;
-    fill: #fff;
-  }
-
-.chat-line__message.bttv-highlighted, .vod-message.bttv-highlighted {
-  background-color: rgba(255, 0, 0, 0.3) !important;
-}
-
-#bttv-channel-state-contain {
-  position: absolute;
-  top: 24px;
-  left: 20px;
-  width: 150px;
-  height: 24px;
-  color: #6441a4;
-}
-
-  #bttv-channel-state-contain svg path {
-    fill: #6441a4;
-  }
-
-  #bttv-channel-state-contain div {
-    float: left;
-    height: 22px;
-    display: none;
-  }
-
-  #bttv-channel-state-contain .slow {
-    position: relative;
-    text-align: right;
-  }
-
-  #bttv-channel-state-contain .slow .slow-time {
-      font-size: 9px;
-      padding-top: 5px;
-      margin-right: -4px;
-    }
-
-.bttv-chat-header-chat-state #chat-room-header-label p[data-test-selector="chat-room-header-label"] {
-  font-size: 10px;
-  margin-top: -14px;
-}
-
-.tw-root--theme-dark #bttv-channel-state-contain {
-    color: #b19dd8;
-  }
-
-.tw-root--theme-dark #bttv-channel-state-contain svg path {
-      fill: #b19dd8;
-    }
-
-.bttv-hide-tab-completion-tooltip .tw-balloon[data-a-target="autocomplete-balloon"] {
-    display: none !important;
-  }
-
-.clip-chat-badge__img {
-  border-radius: 3px;
-}
 
 .viewer-card__actions .tw-c-background-alt-2 .viewer-card-drag-cancel .tw-pd-r-1, .viewer-card__actions .tw-c-background-alt-2 .viewer-card-drag-cancel .tw-pd-l-1 {
         padding-right: 0px !important;
@@ -324,57 +314,84 @@
         border-left-color: white;
     }
 
-#bttv-custom-timeout-contain {
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  width: 80px;
-  height: 200px;
-  overflow: hidden;
-
-  background: rgba(90,90,90,0.4);
-
-  z-index: 99999;
-}
-
-  #bttv-custom-timeout-contain .text, #bttv-custom-timeout-contain .cursor {
-    position: absolute;
-    left: 0px;
-    top: 100px;
-    width: 80px;
-    height: 1px;
-    background: #f00;
-  }
-
-  #bttv-custom-timeout-contain .text {
-    top: 85px;
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
-    background: rgba(0,0,0,0.6);
-    cursor: default;
-    display: none;
-    color: #d3d3d3;
-  }
-
-#bttv-custom-timeout-contain:hover .text {
-  display: block;
-}
-
-#bttv-custom-timeout-contain:hover .cursor {
-  background: #0f0;
-}
-
-.chat-list__lines.bttv-disable-name-colors .chat-line__message, .chat-list__lines.bttv-disable-name-colors .chat-author__display-name, .chat-list__lines.bttv-disable-name-colors .chat-author__intl-login {
-    color: inherit !important;
-  }
-
 .chat-settings {
   overflow-y: scroll;
 }
 
   .chat-settings button[data-a-target="clear-chat-button"] {
     display: none;
+  }
+
+#bttv-channel-state-contain {
+  position: absolute;
+  top: 24px;
+  left: 20px;
+  width: 150px;
+  height: 24px;
+  color: #6441a4;
+}
+
+  #bttv-channel-state-contain svg path {
+    fill: #6441a4;
+  }
+
+  #bttv-channel-state-contain div {
+    float: left;
+    height: 22px;
+    display: none;
+  }
+
+  #bttv-channel-state-contain .slow {
+    position: relative;
+    text-align: right;
+  }
+
+  #bttv-channel-state-contain .slow .slow-time {
+      font-size: 9px;
+      padding-top: 5px;
+      margin-right: -4px;
+    }
+
+.bttv-chat-header-chat-state #chat-room-header-label p[data-test-selector="chat-room-header-label"] {
+  font-size: 10px;
+  margin-top: -14px;
+}
+
+.tw-root--theme-dark #bttv-channel-state-contain {
+    color: #b19dd8;
+  }
+
+.tw-root--theme-dark #bttv-channel-state-contain svg path {
+      fill: #b19dd8;
+    }
+
+.bttv-hide-tab-completion-tooltip .tw-balloon[data-a-target="autocomplete-balloon"] {
+    display: none !important;
+  }
+
+.clip-chat-badge__img {
+  border-radius: 3px;
+}
+
+.bttv-hide-conversations .whispers {
+    display: none;
+  }
+
+.bttv-auto-hide-conversations .whispers .whispers-threads-box__container {
+      bottom: -30px !important;
+      transition: bottom 100ms ease-in-out
+    }
+
+.bttv-auto-hide-conversations .whispers .whispers-threads-box__container:hover, .bttv-auto-hide-conversations .whispers .whispers-threads-box__container.whispers-threads-box__container--open {
+    bottom: 0px !important;
+}
+
+.bttv-hide-conversations .video-player--theatre .video-player__container, .bttv-auto-hide-conversations .video-player--theatre .video-player__container {
+      bottom: 0rem;
+    }
+
+.chat-list__lines.bttv-disable-name-colors .chat-line__message, .chat-list__lines.bttv-disable-name-colors .chat-author__display-name, .chat-list__lines.bttv-disable-name-colors .chat-author__intl-login {
+    color: inherit !important;
   }
 
 /* Prevent stacking of IceCube, SoSnowy */
@@ -513,6 +530,10 @@ div.bttv-emote + .bttv-emo-567b5dc00e984428652809bd img {
   height: 15px;
 }
 
+.bttv-hide-chat-clips .chat-card__link {
+    display: none !important;
+  }
+
 .bttv-hide-bits .pinned-cheer,
   .bttv-hide-bits .pinned-cheer-v2,
   .bttv-hide-bits button[data-a-target="bits-button"],
@@ -527,9 +548,18 @@ div.bttv-emote + .bttv-emo-567b5dc00e984428652809bd img {
     display: none;
   }
 
-.bttv-hide-chat-clips .chat-card__link {
+.bttv-hide-room-selector .room-selector__header {
     display: none !important;
   }
+
+.bttv-host-button {
+  background: #efeef1 !important;
+  margin-bottom: 10px;
+}
+
+.tw-root--theme-dark .bttv-host-button {
+  background: #433f4a !important;
+}
 
 .bttv-hide-featured-channels .recommended-channels {
     display: none;
@@ -544,10 +574,6 @@ div.bttv-emote + .bttv-emo-567b5dc00e984428652809bd img {
   }
 
 .bttv-hide-followed-offline .side-nav-card__link[href*="/videos/"] {
-    display: none !important;
-  }
-
-.bttv-hide-room-selector .room-selector__header {
     display: none !important;
   }
 
@@ -876,15 +902,6 @@ div.bttv-emote + .bttv-emo-567b5dc00e984428652809bd img {
     background-color: #1f1925;
   }
 
-.bttv-host-button {
-  background: #efeef1 !important;
-  margin-bottom: 10px;
-}
-
-.tw-root--theme-dark .bttv-host-button {
-  background: #433f4a !important;
-}
-
 .bttv-hide-player-extensions .extension-container, .bttv-hide-player-extensions .extension-taskbar {
     display: none !important;
   }
@@ -892,20 +909,3 @@ div.bttv-emote + .bttv-emo-567b5dc00e984428652809bd img {
 .bttv-hide-player-cursor .video-player--fullscreen .player {
     cursor: none;
   }
-
-.bttv-hide-conversations .whispers {
-    display: none;
-  }
-
-.bttv-auto-hide-conversations .whispers .whispers-threads-box__container {
-      bottom: -30px !important;
-      transition: bottom 100ms ease-in-out
-    }
-
-.bttv-auto-hide-conversations .whispers .whispers-threads-box__container:hover, .bttv-auto-hide-conversations .whispers .whispers-threads-box__container.whispers-threads-box__container--open {
-    bottom: 0px !important;
-}
-
-.bttv-hide-conversations .video-player--theatre .video-player__container, .bttv-auto-hide-conversations .video-player--theatre .video-player__container {
-      bottom: 0rem;
-    }
