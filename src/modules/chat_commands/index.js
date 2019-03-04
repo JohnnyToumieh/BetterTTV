@@ -33,12 +33,23 @@ const CommandHelp = {
 
 const CustomCommands = {
     brainpower: 'Usage: "/brainpower [color or isAction]" - Sends the brainpower meme',
+    print: 'Usage: "/print [color] [message]" - Sends a message in the specified color',
     pyramid: 'Usage: "/pyramid [size] [emote]" - Makes a pyramid of the given size and emote',
     rainbow: 'Usage: "/rainbow [message]" - Spams the given message in rainbow colors'
 };
 
 const colors = {'red': '#FF0000', 'orange': '#FF7F00', 'yellow': '#FFFF00', 'green': '#00FF00', 'blue': '#0000FF', 'purple': '#4B0082'};
 const originalColor = '#DAA520';
+
+function getHexColor(color) {
+    if (color.match('^[#][0-9A-Fa-f]{6}$')) {
+        return color;
+    } else if (colors[color]) {
+        return colors[color];
+    }
+    
+    return null;
+}
 
 function secondsToLength(s) {
     const days = Math.floor(s / 86400);
@@ -243,14 +254,8 @@ function handleCommands(message) {
                     return '/me ' + brainpowerMessage;
                 }
                 
-                let color = null;
-                
-                if (messageParts[0].match('^[#][0-9A-Fa-f]{6}$')) {
-                    color = messageParts[0];
-                } else if (colors[messageParts[0]]) {
-                    color = colors[messageParts[0]];
-                }
-                
+                let color = getHexColor(messageParts[0]);
+
                 if (color != null) {
                     twitch.sendChatMessage(`/color ${color}`);
                     setTimeout(function() {
@@ -263,6 +268,24 @@ function handleCommands(message) {
                 }
             }
             return brainpowerMessage;
+        case 'print':
+            if (!messageParts || messageParts.length < 2 || !getHexColor(messageParts[0])) {
+                twitch.sendChatAdminMessage('Example usage: /print blue Helloooo I am great');
+                break;
+            }
+            
+            let tempArray = messageParts;
+            let color = getHexColor(tempArray.shift());
+            let message = tempArray.join(' ');
+            
+            twitch.sendChatMessage(`/color ${color}`);
+            setTimeout(function() {
+                twitch.sendChatMessage('/me ' + message);
+                setTimeout(function() {
+                    twitch.sendChatMessage(`/color ${originalColor}`);
+                }, 150);
+            }, 150);
+            break;
         case 'pyramid':
             let size = 0;
             let emote = '';
