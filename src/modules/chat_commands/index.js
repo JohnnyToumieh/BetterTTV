@@ -340,12 +340,18 @@ function handleCommands(message) {
                 twitch.sendChatAdminMessage('Pyramid can\'t be smaller than 2 emotes');
                 break;
             }
+            
+            const extramessage = isModeratorOrHigher() ? "" : "⠀";
 
             for (let i = 1; i < (size * 2); i++) {
                 let n = (i > size) ? (size * 2) - i : i;
                 
                 setTimeout(function(n, emote) {
-                    twitch.sendChatMessage((emote + ' ').repeat(n));
+                    let toSend = (emote + ' ').repeat(n);
+                    if (n != size) {
+                        toSend += extramessage;
+                    }
+                    twitch.sendChatMessage(toSend);
                 }, ((i - 1) * getTimeBetweenMessages()), n, emote);
             }
             break;
