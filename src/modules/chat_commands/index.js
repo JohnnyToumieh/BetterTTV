@@ -32,7 +32,7 @@ const CommandHelp = {
 };
 
 const CustomCommands = {
-    brainpower: 'Usage: "/brainpower [isAction]" - Sends the brainpower meme',
+    brainpower: 'Usage: "/brainpower [color or isAction]" - Sends the brainpower meme',
     pyramid: 'Usage: "/pyramid [size] [emote]" - Makes a pyramid of the given size and emote',
     rainbow: 'Usage: "/rainbow [message]" - Spams the given message in rainbow colors'
 };
@@ -239,7 +239,7 @@ function handleCommands(message) {
             let brainpowerMessage = 'O-oooooooooo AAAAE-A-A-I-A-U- JO-oooooooooooo AAE-O-A-A-U-U-A- E-eee-ee-eee AAAAE-A-E-I-E-A-JO-ooo-oo-oo-oo EEEEO-A-AAA-AAAA';
         
             if (messageParts && messageParts.length) {
-                if (messageParts[0] == 'true' || messageParts[0] == '1') {
+                if (messageParts[0] == 'true' || messageParts[0] == '1' || messageParts[0] == 'me') {
                     return '/me ' + brainpowerMessage;
                 }
                 
