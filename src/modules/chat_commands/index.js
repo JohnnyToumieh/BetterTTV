@@ -243,26 +243,23 @@ function handleCommands(message) {
                     return '/me ' + brainpowerMessage;
                 }
                 
+                let color = null;
+                
                 if (messageParts[0].match('^[#][0-9A-Fa-f]{6}$')) {
-                    twitch.sendChatMessage(`/color ${messageParts[0]}`);
-                    setTimeout(function() {
-                        twitch.sendChatMessage('/me ' + brainpowerMessage);
-                        setTimeout(function() {
-                            twitch.sendChatMessage(`/color ${originalColor}`);
-                        }, 150);
-                    }, 150);
-                    break;
+                    color = messageParts[0];
+                } else if (colors[messageParts[0]]) {
+                    color = colors[messageParts[0]];
                 }
                 
-                if (colors[messageParts[0]]) {
-                    twitch.sendChatMessage(`/color ${colors[messageParts[0]]}`);
+                if (color != null) {
+                    twitch.sendChatMessage(`/color ${color}`);
                     setTimeout(function() {
                         twitch.sendChatMessage('/me ' + brainpowerMessage);
                         setTimeout(function() {
                             twitch.sendChatMessage(`/color ${originalColor}`);
                         }, 150);
                     }, 150);
-                    break;
+                    break;                   
                 }
             }
             return brainpowerMessage;
