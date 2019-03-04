@@ -37,6 +37,9 @@ const CustomCommands = {
     rainbow: 'Usage: "/rainbow [message]" - Spams the given message in rainbow colors'
 };
 
+const colors = {'red': '#FF0000', 'orange': '#FF7F00', 'yellow': '#FFFF00', 'green': '#00FF00', 'blue': '#0000FF', 'purple': '#4B0082'};
+const originalColor = '#DAA520';
+
 function secondsToLength(s) {
     const days = Math.floor(s / 86400);
     const hours = Math.floor(s / 3600) - (days * 24);
@@ -235,8 +238,32 @@ function handleCommands(message) {
         case 'brainpower':
             let brainpowerMessage = 'O-oooooooooo AAAAE-A-A-I-A-U- JO-oooooooooooo AAE-O-A-A-U-U-A- E-eee-ee-eee AAAAE-A-E-I-E-A-JO-ooo-oo-oo-oo EEEEO-A-AAA-AAAA';
         
-            if (messageParts && messageParts.length && (messageParts[0] == 'true' || messageParts[0] == '1')) {
-                return '/me ' + brainpowerMessage;
+            if (messageParts && messageParts.length) {
+                if (messageParts[0] == 'true' || messageParts[0] == '1') {
+                    return '/me ' + brainpowerMessage;
+                }
+                
+                if (messageParts[0].match('^[#][0-9A-Fa-f]{6}$')) {
+                    twitch.sendChatMessage(`/color ${messageParts[0]}`);
+                    setTimeout(function() {
+                        twitch.sendChatMessage('/me ' + brainpowerMessage);
+                        setTimeout(function() {
+                            twitch.sendChatMessage(`/color ${originalColor}`);
+                        }, 150);
+                    }, 150);
+                    break;
+                }
+                
+                if (colors[messageParts[0]]) {
+                    twitch.sendChatMessage(`/color ${colors[messageParts[0]]}`);
+                    setTimeout(function() {
+                        twitch.sendChatMessage('/me ' + brainpowerMessage);
+                        setTimeout(function() {
+                            twitch.sendChatMessage(`/color ${originalColor}`);
+                        }, 150);
+                    }, 150);
+                    break;
+                }
             }
             return brainpowerMessage;
         case 'pyramid':
@@ -269,22 +296,22 @@ function handleCommands(message) {
                 break;
             }
             
-            const colors = ['#FF0000', '#FF7F00', '#FFFF00', '#00FF00', '#0000FF', '#4B0082'];
-            const originalColor = '#DAA520';
             const time1 = isModeratorOrHigher() ? 150 : 1050;
             const time2 = isModeratorOrHigher() ? 300 : 1200;
             const extramessage = isModeratorOrHigher() ? "" : "⠀";
             
             let i = 0;
             
-            for (let color of colors) {
-                setTimeout(function(i, color) {
-                    twitch.sendChatMessage(`/color ${color}`);
-                    setTimeout(function(i) {
-                        twitch.sendChatMessage(`/me ${messageParts.join(' ')}` + extramessage.repeat(i));
-                    }, time1, i);
-                }, i * time2, i, color);
-                i++;
+            for (let key in colors) {
+                if (colors.hasOwnProperty(key)) {
+                    setTimeout(function(i, color) {
+                        twitch.sendChatMessage(`/color ${color}`);
+                        setTimeout(function(i) {
+                            twitch.sendChatMessage(`/me ${messageParts.join(' ')}` + extramessage.repeat(i));
+                        }, time1, i);
+                    }, i * time2, i, colors[key]);
+                    i++;
+                }
             }
             
             setTimeout(_ => {
