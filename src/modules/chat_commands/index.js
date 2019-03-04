@@ -396,6 +396,7 @@ function handleCommands(message) {
                 return false;
             } else if (!subCommand) {
                 twitch.sendChatAdminMessage(`BetterTTV Chat Commands: (Use "/help <command>" for more info on a command) /${commandNames.join(' /')}`);
+                twitch.sendChatAdminMessage(`Custom Chat Commands: (Use "/customcommands <command>" for more info on a command) /${Object.keys(CustomCommands).join(' /')}`);
             }
             return true;
 
