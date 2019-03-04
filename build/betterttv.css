@@ -173,6 +173,59 @@
   background-color: rgba(255, 0, 0, 0.3) !important;
 }
 
+.bttv-swap-chat .right-column {
+        order: 1;
+    }
+    .bttv-swap-chat .twilight-main {
+        order: 2;
+    }
+    .bttv-swap-chat .side-nav {
+        order: 3;
+    }
+    /* Toggle Visibility Arrows */
+    .bttv-swap-chat .side-nav__toggle-visibility {
+        right: unset;
+        left: -2.5rem;
+        -webkit-transform: rotate(-180deg);
+                transform: rotate(-180deg);
+    }
+    .bttv-swap-chat .side-nav--collapsed .side-nav__toggle-visibility {
+        -webkit-transform: rotate(180deg);
+                transform: rotate(180deg);
+    }
+    .bttv-swap-chat .right-column__toggle-visibility {
+         right: -2.5rem;
+         left: unset;
+         -webkit-transform: rotate(180deg);
+                 transform: rotate(180deg);
+    }
+    .bttv-swap-chat .right-column--collapsed .right-column__toggle-visibility {
+        -webkit-transform: rotate(-180deg);
+                transform: rotate(-180deg);
+    }
+    /* Friend Hover Balloon */
+    .bttv-swap-chat .user-card-layer__balloon {
+        left: calc(100% - 65rem) !important;
+    }
+    .bttv-swap-chat .user-card-layer__balloon .tw-balloon__tail {
+            margin: 0 -3px 0 0;
+            left: unset;
+            right: 0;
+        }
+    /* Theatre Mode */
+    .bttv-swap-chat .persistent-player--theatre, .bttv-swap-chat .channel-page__video-player--theatre-mode {
+        left: auto !important;
+        right: 0;
+    }
+    .bttv-swap-chat .right-column--theatre {
+        right: unset !important;
+    }
+    /* Subscriber balloons on channel page */
+    .bttv-swap-chat .chat-input div.tw-balloon[data-a-target="sub-balloon"] {
+        left: auto !important;
+        right: unset !important;
+    }
+
 .viewer-card__actions .tw-c-background-alt-2 .viewer-card-drag-cancel .tw-pd-r-1, .viewer-card__actions .tw-c-background-alt-2 .viewer-card-drag-cancel .tw-pd-l-1 {
         padding-right: 0px !important;
         padding-left: 0px !important;
@@ -261,59 +314,6 @@
         border-left-color: white;
     }
 
-.bttv-swap-chat .right-column {
-        order: 1;
-    }
-    .bttv-swap-chat .twilight-main {
-        order: 2;
-    }
-    .bttv-swap-chat .side-nav {
-        order: 3;
-    }
-    /* Toggle Visibility Arrows */
-    .bttv-swap-chat .side-nav__toggle-visibility {
-        right: unset;
-        left: -2.5rem;
-        -webkit-transform: rotate(-180deg);
-                transform: rotate(-180deg);
-    }
-    .bttv-swap-chat .side-nav--collapsed .side-nav__toggle-visibility {
-        -webkit-transform: rotate(180deg);
-                transform: rotate(180deg);
-    }
-    .bttv-swap-chat .right-column__toggle-visibility {
-         right: -2.5rem;
-         left: unset;
-         -webkit-transform: rotate(180deg);
-                 transform: rotate(180deg);
-    }
-    .bttv-swap-chat .right-column--collapsed .right-column__toggle-visibility {
-        -webkit-transform: rotate(-180deg);
-                transform: rotate(-180deg);
-    }
-    /* Friend Hover Balloon */
-    .bttv-swap-chat .user-card-layer__balloon {
-        left: calc(100% - 65rem) !important;
-    }
-    .bttv-swap-chat .user-card-layer__balloon .tw-balloon__tail {
-            margin: 0 -3px 0 0;
-            left: unset;
-            right: 0;
-        }
-    /* Theatre Mode */
-    .bttv-swap-chat .persistent-player--theatre, .bttv-swap-chat .channel-page__video-player--theatre-mode {
-        left: auto !important;
-        right: 0;
-    }
-    .bttv-swap-chat .right-column--theatre {
-        right: unset !important;
-    }
-    /* Subscriber balloons on channel page */
-    .bttv-swap-chat .chat-input div.tw-balloon[data-a-target="sub-balloon"] {
-        left: auto !important;
-        right: unset !important;
-    }
-
 .chat-settings {
   overflow-y: scroll;
 }
@@ -321,27 +321,6 @@
   .chat-settings button[data-a-target="clear-chat-button"] {
     display: none;
   }
-
-.bttv-hide-conversations .whispers {
-    display: none;
-  }
-
-.bttv-auto-hide-conversations .whispers .whispers-threads-box__container {
-      bottom: -30px !important;
-      transition: bottom 100ms ease-in-out
-    }
-
-.bttv-auto-hide-conversations .whispers .whispers-threads-box__container:hover, .bttv-auto-hide-conversations .whispers .whispers-threads-box__container.whispers-threads-box__container--open {
-    bottom: 0px !important;
-}
-
-.bttv-hide-conversations .video-player--theatre .video-player__container, .bttv-auto-hide-conversations .video-player--theatre .video-player__container {
-      bottom: 0rem;
-    }
-
-.clip-chat-badge__img {
-  border-radius: 3px;
-}
 
 #bttv-channel-state-contain {
   position: absolute;
@@ -390,20 +369,30 @@
     display: none !important;
   }
 
+.bttv-hide-conversations .whispers {
+    display: none;
+  }
+
+.bttv-auto-hide-conversations .whispers .whispers-threads-box__container {
+      bottom: -30px !important;
+      transition: bottom 100ms ease-in-out
+    }
+
+.bttv-auto-hide-conversations .whispers .whispers-threads-box__container:hover, .bttv-auto-hide-conversations .whispers .whispers-threads-box__container.whispers-threads-box__container--open {
+    bottom: 0px !important;
+}
+
+.bttv-hide-conversations .video-player--theatre .video-player__container, .bttv-auto-hide-conversations .video-player--theatre .video-player__container {
+      bottom: 0rem;
+    }
+
+.clip-chat-badge__img {
+  border-radius: 3px;
+}
+
 .chat-list__lines.bttv-disable-name-colors .chat-line__message, .chat-list__lines.bttv-disable-name-colors .chat-author__display-name, .chat-list__lines.bttv-disable-name-colors .chat-author__intl-login {
     color: inherit !important;
   }
-
-.pinned-cheer .pinned-cheer__bounding-box:before {
-  content: "×";
-  position: absolute;
-  color: #777;
-  cursor: pointer;
-  top: 0px;
-  right: 5px;
-  width: 8px;
-  height: 15px;
-}
 
 /* Prevent stacking of IceCube, SoSnowy */
 .bttv-emo-5849c9a4f52be01a7ee5f79d + .bttv-emo-5849c9a4f52be01a7ee5f79d,
@@ -530,6 +519,21 @@ div.bttv-emote + .bttv-emo-567b5dc00e984428652809bd img {
   background: #fff;
 }
 
+.pinned-cheer .pinned-cheer__bounding-box:before {
+  content: "×";
+  position: absolute;
+  color: #777;
+  cursor: pointer;
+  top: 0px;
+  right: 5px;
+  width: 8px;
+  height: 15px;
+}
+
+.bttv-hide-chat-clips .chat-card__link {
+    display: none !important;
+  }
+
 .bttv-hide-bits .pinned-cheer,
   .bttv-hide-bits .pinned-cheer-v2,
   .bttv-hide-bits button[data-a-target="bits-button"],
@@ -537,10 +541,6 @@ div.bttv-emote + .bttv-emo-567b5dc00e984428652809bd img {
   .bttv-hide-bits img.chat-line__message--emote[src^="https://d3aqoihi2n8ty8.cloudfront.net/actions/"],
   .bttv-hide-bits img.chat-line__message--emote[src^="https://d3aqoihi2n8ty8.cloudfront.net/partner-actions/"],
   .bttv-hide-bits .chat-badge[alt~="Cheer"] {
-    display: none !important;
-  }
-
-.bttv-hide-chat-clips .chat-card__link {
     display: none !important;
   }
 
