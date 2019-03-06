@@ -32,11 +32,12 @@ const CommandHelp = {
 };
 
 const CustomCommands = {
+    actionmode: 'Usage: "/actionmode" - Turns on always action mode',
+    actionmodeoff: 'Usage: "/actionmodeoff" - Turns off always action mode',
     brainpower: 'Usage: "/brainpower [color or isAction]" - Sends the brainpower meme',
     colormode: 'Usage: "/colormode" - Turns on random coloring mode',
     colormodeoff: 'Usage: "/colormodeoff" - Turns off random coloring mode',
-    actionmode: 'Usage: "/actionmode" - Turns on always action mode',
-    actionmodeoff: 'Usage: "/actionmodeoff" - Turns off always action mode',
+    muted: 'Usage: "/muted" - Sends a mic muted message',
     print: 'Usage: "/print [color] [message]" - Sends a message in the specified color',
     pyramid: 'Usage: "/pyramid [size] [emote]" - Makes a pyramid of the given size and emote',
     rainbow: 'Usage: "/rainbow [message]" - Spams the given message in rainbow colors'
@@ -273,6 +274,20 @@ function handleCommands(message) {
             break;
 
         // custom commands
+        case 'colormode':
+        case 'colormodeoff':
+            colorMode = !command.endsWith('off');
+            twitch.sendChatAdminMessage(`Color mode ${colorMode ? 'enabled' : 'disabled'}.`);
+            if (!colorMode) {
+                twitch.sendChatMessage(`/color ${originalColor}`);
+            }
+            break;
+        case 'actionmode':
+        case 'actionmodeoff':
+            actionMode = !command.endsWith('off');
+            twitch.sendChatAdminMessage(`Action mode ${actionMode ? 'enabled' : 'disabled'}.`);
+            break;
+            
         case 'brainpower':
             let brainpowerMessage = 'O-oooooooooo AAAAE-A-A-I-A-U- JO-oooooooooooo AAE-O-A-A-U-U-A- E-eee-ee-eee AAAAE-A-E-I-E-A-JO-ooo-oo-oo-oo EEEEO-A-AAA-AAAA';
         
@@ -295,19 +310,8 @@ function handleCommands(message) {
                 }
             }
             return brainpowerMessage;
-        case 'colormode':
-        case 'colormodeoff':
-            colorMode = !command.endsWith('off');
-            twitch.sendChatAdminMessage(`Color mode ${colorMode ? 'enabled' : 'disabled'}.`);
-            if (!colorMode) {
-                twitch.sendChatMessage(`/color ${originalColor}`);
-            }
-            break;
-        case 'actionmode':
-        case 'actionmodeoff':
-            actionMode = !command.endsWith('off');
-            twitch.sendChatAdminMessage(`Action mode ${actionMode ? 'enabled' : 'disabled'}.`);
-            break;
+        case 'muted':
+            return 'mic muted :microphone: dreadsPog';
         case 'print':
             if (!messageParts || messageParts.length < 2 || !getHexColor(messageParts[0])) {
                 twitch.sendChatAdminMessage('Example usage: /print blue Helloooo I am great');
