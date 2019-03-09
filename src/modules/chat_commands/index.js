@@ -38,6 +38,7 @@ const CustomCommands = {
     colormode: 'Usage: "/colormode" - Turns on random coloring mode',
     colormodeoff: 'Usage: "/colormodeoff" - Turns off random coloring mode',
     muted: 'Usage: "/muted" - Sends a mic muted message',
+    poop: 'Usage: "/poop" - Sends a poop animation message',
     print: 'Usage: "/print [color] [message]" - Sends a message in the specified color',
     pyramid: 'Usage: "/pyramid [size] [emote]" - Makes a pyramid of the given size and emote',
     rainbow: 'Usage: "/rainbow [message]" - Spams the given message in rainbow colors'
@@ -312,6 +313,8 @@ function handleCommands(message) {
             return brainpowerMessage;
         case 'muted':
             return 'mic muted :microphone: dreadsPog';
+        case 'poop':
+            return 'dreadsS sungliP -> SchubertWalk -> peePoo -> peepoPooPoo'
         case 'print':
             if (!messageParts || messageParts.length < 2 || !getHexColor(messageParts[0])) {
                 twitch.sendChatAdminMessage('Example usage: /print blue Helloooo I am great');
