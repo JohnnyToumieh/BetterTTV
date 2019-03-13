@@ -314,7 +314,7 @@ function handleCommands(message) {
         case 'muted':
             return 'mic muted :microphone: dreadsPog';
         case 'poop':
-            return 'dreadsS sungliP -> SchubertWalk -> peePoo -> peepoPooPoo'
+            return 'dreadsPee sungliP -> SchubertWalk -> peePoo -> peepoPooPoo'
         case 'print':
             if (!messageParts || messageParts.length < 2 || !getHexColor(messageParts[0])) {
                 twitch.sendChatAdminMessage('Example usage: /print blue Helloooo I am great');
